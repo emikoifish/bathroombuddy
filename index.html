@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 	<head>
     	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -25,10 +24,11 @@
 	<script type="text/javascript">
 
 		var locations = [
-			['Bookstore', 36.998189, -122.055518, 'Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">'],
-			['Classroom Unit', 36.997958, -122.056633, 'Classroom Unit</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">']
+			['Bookstore', 36.998189, -122.055518, 'Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">',['all-gender',"all"]],
+			['Classroom Unit', 36.997958, -122.056633, 'Classroom Unit</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">',['single-gender',"all"]]
 		];
 
+		var gooMarker = [];
 		function initMap() {
 			var myOptions = {
 				center: {lat: 36.9913856, lng: -122.0608718},
@@ -51,12 +51,14 @@
 				var lat = locations[i][1]
 				var long = locations[i][2]
 				var add =  locations[i][3]
+				var category =locations[i][4]
 
 				latlngset = new google.maps.LatLng(lat, long);
 
 				var marker = new google.maps.Marker({  
-					map: map, title: place , position: latlngset  
+					map: map, title: place , position: latlngset, category: category
 				});
+				gooMarker.push(marker);
 				map.setCenter(marker.getPosition())
 
 				var content = "<h3>"+place+"</h3> "+ add     
@@ -72,9 +74,27 @@
 				(marker,content,infowindow)); 
 			}
 		}
+		filterMarkers = function (category) {
+			for (i = 0; i < locations.length; i++) {
+				
+			  	// If is same category or category not picked
+			  	if((typeof gooMarker[i].category == 'object' && gooMarker[i].category.indexOf(category) >= 0) || category.length == 0){
+					gooMarker[i].setVisible(true);
+			  	}
+			  	// Categories don't match 
+			  	else {
+					gooMarker[i].setVisible(false);
+			  	}
+			}
+		}
 	</script>
 	</head>
 	<body onload="initMap()">
-		<div id="default" style="width:100%; height:100%"></div>
+	<div id="default" style="width:100%; height:500px"></div>
+	<select id="default" onchange="filterMarkers(this.value);">
+    	<option value="all">all results</option>
+    	<option value="single-gender">single-gender</option>
+    	<option value="all-gender">all-gender</option>
+	</select>
 	</body>
 </html>
