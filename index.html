@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    	<meta charset="utf-8">
+    	<title>Bathroom Buddy</title>
+    	<style>
+      	/* Always set the map height explicitly to define the size of the div
+       	* element that contains the map. */
+      	#map {
+        		height: 100%;
+      	}
+      	/* Optional: Makes the sample page fill the window. */
+      	html, body {
+        		height: 100%;
+        		margin: 0;
+        		padding: 0;
+      	}
+    	</style>
+  	</head>
+  	<body>
+    	<div id="map"></div>
+    		<script>
+
+			// This example displays a marker at the center of Australia.
+			// When the user clicks the marker, an info window opens.
+
+			function initMap() {
+			  	var markers = [['Bookstore', 36.998189, -122.055518],['Classroom Unit', 36.997958, -122.056633, '<div id="content">'+'<div id="siteNotice">'+'</div>']];
+				var infowindows = ['<div id="content">'+'<div id="siteNotice">'+'</div>'+
+					'<h1 id="firstHeading" class="firstHeading">Bay Tree Bookstore</h1>'+
+					'<div id="bodyContent">'+
+					'<p><b>Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located ' +
+					'outside the bookstore, closest to the stairs that lead to Crown, '+
+					'across from <b>Iveta</b>. <br>'+ 
+					'<img src="bookstore.jpg" alt="bookstore" style="width:304px;">'+
+					'</div>'+'</div>', 
+					'<h1 id="firstHeading" class="firstHeading">Classroom Unit</h1>'+
+					'<div id="bodyContent">'+
+					'<p><b>Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located ' +
+					'outside the bookstore, closest to the stairs that lead to Crown, '+
+					'across from <b>Iveta</b>. <br>'+ 
+					'<img src="bookstore.jpg" alt="bookstore" style="width:304px;">'+
+					'</div>'+'</div>']
+			  	var map = new google.maps.Map(document.getElementById('map'), {
+				 	zoom: 15,
+				 	center: {lat: 36.9913856, lng: -122.0608718}
+			  	});
+			 	
+				for (var i = 0; i < places.length; i++) {
+					var place = places[i];
+					var marker = new google.maps.Marker({
+						position: {lat: place[1], lng: place[2]},
+						map: map,
+						title: place[0]
+					});
+					infowindows[i] = new google.maps.InfoWindow({
+				 		content: place[3]
+				 	});
+					marker.addListener(marker, 'click', function() {
+						infowindows[i].open(map, marker);
+					});
+				}
+			}
+		</script>
+		<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Wl5b0AJ8xmFYPo7qeZeSGorg6yOosxc&callback=initMap">
+		</script>
+  	</body>
+</html>
