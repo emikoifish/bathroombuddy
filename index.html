@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  	<head>
+	<head>
     	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     	<meta charset="utf-8">
     	<title>Bathroom Buddy</title>
@@ -17,54 +17,64 @@
         		padding: 0;
       	}
     	</style>
-  	</head>
-  	<body>
-    	<div id="map"></div>
-    		<script>
-
-			// This example displays a marker at the center of Australia.
-			// When the user clicks the marker, an info window opens.
-
-			function initMap() {
-			  	var markers = [['Bookstore', 36.998189, -122.055518],['Classroom Unit', 36.997958, -122.056633, '<div id="content">'+'<div id="siteNotice">'+'</div>']];
-				var infowindows = ['<div id="content">'+'<div id="siteNotice">'+'</div>'+
-					'<h1 id="firstHeading" class="firstHeading">Bay Tree Bookstore</h1>'+
-					'<div id="bodyContent">'+
-					'<p><b>Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located ' +
-					'outside the bookstore, closest to the stairs that lead to Crown, '+
-					'across from <b>Iveta</b>. <br>'+ 
-					'<img src="bookstore.jpg" alt="bookstore" style="width:304px;">'+
-					'</div>'+'</div>', 
-					'<h1 id="firstHeading" class="firstHeading">Classroom Unit</h1>'+
-					'<div id="bodyContent">'+
-					'<p><b>Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located ' +
-					'outside the bookstore, closest to the stairs that lead to Crown, '+
-					'across from <b>Iveta</b>. <br>'+ 
-					'<img src="bookstore.jpg" alt="bookstore" style="width:304px;">'+
-					'</div>'+'</div>']
-			  	var map = new google.maps.Map(document.getElementById('map'), {
-				 	zoom: 15,
-				 	center: {lat: 36.9913856, lng: -122.0608718}
-			  	});
-			 	
-				for (var i = 0; i < places.length; i++) {
-					var place = places[i];
-					var marker = new google.maps.Marker({
-						position: {lat: place[1], lng: place[2]},
-						map: map,
-						title: place[0]
-					});
-					infowindows[i] = new google.maps.InfoWindow({
-				 		content: place[3]
-				 	});
-					marker.addListener(marker, 'click', function() {
-						infowindows[i].open(map, marker);
-					});
-				}
-			}
-		</script>
-		<script async defer
+  	</head> 
+  	
+	<script type="text/javascript"
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Wl5b0AJ8xmFYPo7qeZeSGorg6yOosxc&callback=initMap">
-		</script>
-  	</body>
+	</script>
+	<script type="text/javascript">
+
+		var locations = [
+			['Bookstore', 36.998189, -122.055518, 'Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">'],
+			['Classroom Unit', 36.997958, -122.056633, 'Classroom Unit</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">']
+		];
+
+		function initMap() {
+			var myOptions = {
+				center: {lat: 36.9913856, lng: -122.0608718},
+				zoom: 15,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			var map = new google.maps.Map(document.getElementById("default"),
+				myOptions);
+			setMarkers(map,locations)
+		}
+
+
+
+		function setMarkers(map,locations){
+			var marker, i
+
+			for (i = 0; i < locations.length; i++){  
+
+				var place = locations[i][0]
+				var lat = locations[i][1]
+				var long = locations[i][2]
+				var add =  locations[i][3]
+
+				latlngset = new google.maps.LatLng(lat, long);
+
+				var marker = new google.maps.Marker({  
+					map: map, title: place , position: latlngset  
+				});
+				map.setCenter(marker.getPosition())
+
+				var content = "<h3>"+place+"</h3> "+ add     
+
+				var infowindow = new google.maps.InfoWindow()
+
+				google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+					return function() {
+						infowindow.setContent(content);
+						infowindow.open(map,marker);
+					};
+				})
+				(marker,content,infowindow)); 
+			}
+		}
+	</script>
+	</head>
+	<body onload="initMap()">
+		<div id="default" style="width:100%; height:100%"></div>
+	</body>
 </html>
