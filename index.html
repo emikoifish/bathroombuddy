@@ -1,9 +1,9 @@
-<!DOCTYPE html>
 <html>
 	<head>
     	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     	<meta charset="utf-8">
-    	<title>Bathroom Buddy</title>
+    	<title>Bathroom Buddies</title>
+    	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
     	<style>
       	/* Always set the map height explicitly to define the size of the div
        	* element that contains the map. */
@@ -15,20 +15,66 @@
         		height: 100%;
         		margin: 0;
         		padding: 0;
+        		background-color: #e5dbce;
       	}
+      	.container{
+      		height:95vh;
+      	}
+      	p{
+      		font-family: 'Catamaran', sans-serif;
+      	}
+      	h1{
+      		font-family: 'Catamaran', sans-serif;
+      	}
+      
+		
     	</style>
   	</head> 
-  	
-	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Wl5b0AJ8xmFYPo7qeZeSGorg6yOosxc&callback=initMap">
-	</script>
+  	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Wl5b0AJ8xmFYPo7qeZeSGorg6yOosxc&callback=initMap"></script>
 	<script type="text/javascript">
 
 		var locations = [
-			['Bookstore', 36.998189, -122.055518, 'Bay Tree Bookstore</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">'],
-			['Classroom Unit', 36.997958, -122.056633, 'Classroom Unit</b>, located within <b>Quarry Plaza</b>, is located outside the bookstore, closest to the stairs that lead to Crown, across from <b>Iveta</b>. <br> <img src="bookstore.jpg" alt="bookstore" style="width:304px;">']
+			['Quarry Plaza' , 36.998189, -122.055518, 'Accessible from outside the building. Bathrooms, located within Quarry Plaza outside the bookstore, closest to the stairs that lead to Crown, across from Iveta in the northwest corner of the Bay Tree bookstore building. <br> <img src="bookstore.jpg" alt="bookstore" style="height:200px;">', ['Single-gender', 'all']],
+			['Classroom Unit', 36.997958, -122.056633, 'Classroom Unit, located at bottom stairs on main side of the building by the Office of international education <br> <img src="classroomunit.jpg" alt="classroomunit" style="height:200px;">', ['Single-gender', 'all']],
+			['Cafe Iveta', 36.998193, -122.055791, 'Accessible from inside Cafe Iveta, located within Quarry Plaza. Upon entrance, turn right toward the beverages bar and will be on the left hand side. Another single stall located across the hall.', ['All-gender', 'all'] ],
+			['College 9 & 10 Dining Hall', 37.000824, -122.057898, 'Accessible inside College 9 & 10 Dining Hall. Upon entrance to the dining hall turn right; on right hand side. Another single stall located across the hall.', ['All-gender', 'all'] ],
+			['Porter Dining Hall', 36.994268, -122.065944, 'Accessible inside Porter Dining Hall. Upon entrance to the dining hall turn left, go straight through double doors, and bathrooms are on the left hand side. <br> <img src="porterdining.jpg" alt="porterdining" style="height:200px;"> ', ['Single-gender', 'all'] ],
+			['Porter Academic Building', 36.994036, -122.065325, 'Accessible from outside building. Located on the bottom floor in hallway on the same side as classrooms. Next to classroom D144.<br> <img src="porter.jpg" alt="porter" style="height:200px;">', ['Single-gender', 'all'] ],
+			['Porter Academic Building', 36.994025, -122.065068, 'Accessible from outside building. Located on the bottom floor behind the staircase in the southeast corner hallway.', ['Single-gender', 'all']],
+			['Namaste Lounge', 37.000778, -122.057219, 'Accessible inside Namaste Lounge. Upon entrance, turn right then bathroom on right hand side.', ['Single-gender', 'all']],
+			['Terry Freitas Cafe', 37.000285, -122.058161, 'Accessible inside Terry Freitas Cafe. Upon entrance, bathroom at the back of recreational area.', ['Single-gender', 'all']],
+			['Thimann Lecture Hall', 36.998032, -122.061235, 'Thimann Lecture Hall, located between lecture halls 1 and 3, on side opposite of laboratories', ['Single-gender', 'all']],
+			['Thimann Laboratories', 36.998080, -122.061840, 'Thimann Laboratories, rooms 481 and 468A', ['All-gender', 'all']],
+			['McHenry', 36.995596, -122.058966, 'McHenry Library, bathroom on every floor, located on west side of building. All gender bathroom located on ground floor, Room 0306 <br> <img src="mchenry.jpg" alt="mchenry" style="height:200px;">', ['All-gender', 'Single-gender', 'all']],
+			['McHenry Classrooms', 36.995806, -122.058820, 'McHenry Classrooms, located by room 1257', ['Single-gender', 'all']],
+			['Science & Engineering Library', 36.998966, -122.060551, 'Science & Engineering Library, located on front side of the building towards the right wall, bathrooms on every floor', ['Single-gender', 'all']],
+			['ARCenter', 36.994372, -122.059243, 'ARCenter, located on first floor towards the front', ['Single-gender', 'all']],
+			['Earth & Marine Sciences', 36.997858, -122.060005, 'Earth and Marine Sciences, located in entrance room by B206', ['Single-gender', 'all']],
+			['Jack Baskin Engineering', 37.000180, -122.063097, 'Jack Baskin Engineering (E1), located outside the building by elevators and stairs. All gender bathroom located in rooms 58 and 60', ['All-gender', 'Single-gender', 'all']],
+			['Jack Baskin Engineering Auditorium', 37.000343, -122.062400, 'Jack Baskin Auditorium, located in rooms 102 and 103', ['All-gender', 'all']],
+			['Media Theater', 36.995142, -122.061661, 'Media Theater, located in hall by main doors', ['Single-gender', 'all']],
+			['Theater Arts Mainstage', 36.995001, -122.062241, 'Theater Arts Mainstage, located in room 212A', ['All-gender', 'all']],
+			['Digital Arts and New Media', 36.993881, -122.060568, 'Digital Arts and New Media, located in front of rooms 151 and 251, located on east side of entrance', ['Single-gender', 'all']],
+			['Social Sciences 2', 37.001815, -122.058972, 'Social Sciences 2, located on first floor at the end of the hallway', ['Single-gender', 'all']],
+			['Social Sciences 1',37.002344, -122.058033, 'Social Sciences 1, located in hallway on the right side of the building, located on first floor', ['Single-gender', 'all']],
+			['Crown Classrooms', 37.000105, -122.054807, 'Crown Classrooms, located on first floor on entrance opposite to the Crown Library', ['Single-gender', 'all']],
+			['Crown/ Merrill Apartments', 37.001630, -122.053750, 'Crown/Merrill Apartments, located between community room and the laundry room', ['All-gender', 'all']],
+			['UCSC Cantú Queer Center', 37.000616, -122.053885, 'Accessible from inside building. Located on the first floor.', ['All-gender', 'all']],
+			['Terra Fresca', 37.001023, -122.057586, 'Terra Fresca, located on second floor, up the stairs and to the right', ['Single-gender', 'all']],
+			['Namaste Lounge', 37.000778, -122.057219, 'Accessible inside Namaste Lounge. Upon entrance, turn right then bathroom on right hand side.', ['Single-gender', 'all']],
+			['Terry Freitas Cafe', 37.000285, -122.058161, 'Accessible inside Terry Freitas Cafe. Upon entrance, bathroom at the back of recreational area.', ['Single-gender', 'all']],
+			['Cowell Dining Hall', 36.997147, -122.053092, 'Accessible outside building. Upon entrance, in the hallway leading to the dining hall, bathroom on the left hand side to the left of the Cowell Cafe.<br> <img src="cowelldining.jpg" alt="cowelldining" style="height:200px;">', ['Single-gender', 'all']],
+			['Elena Baskin Building B', 36.994868, -122.060951, 'Elena Baskin Building B, located in room B102, B103', ['All-gender', 'all']],
+			['Elena Baskin Building H', 36.995069, -122.061023, 'Elena Baskin Building H, located in room H5', ['All-gender', 'all']],
+			['Elena Baskin Building P', 36.994819, -122.061295, 'Elena Baskin Building P, located in rooms P105, P106', ['All-gender', 'all']],
+			['Crown Vallier Hall', 37.000285, -122.058161, 'Accessible from inside building. Located on the first floor to next to the staircase.', ['Single-gender', 'all']]
 		];
 
+		var gooMarker = [];
 		function initMap() {
 			var myOptions = {
 				center: {lat: 36.9913856, lng: -122.0608718},
@@ -51,12 +97,14 @@
 				var lat = locations[i][1]
 				var long = locations[i][2]
 				var add =  locations[i][3]
+				var category =locations[i][4]
 
 				latlngset = new google.maps.LatLng(lat, long);
 
 				var marker = new google.maps.Marker({  
-					map: map, title: place , position: latlngset  
+					map: map, title: place , position: latlngset, category: category
 				});
+				gooMarker.push(marker);
 				map.setCenter(marker.getPosition())
 
 				var content = "<h3>"+place+"</h3> "+ add     
@@ -72,9 +120,45 @@
 				(marker,content,infowindow)); 
 			}
 		}
+		filterMarkers = function (category) {
+			for (i = 0; i < locations.length; i++) {
+				console.log(category);
+			  	// If is same category or category not picked
+			  	if((typeof gooMarker[i].category == 'object' && gooMarker[i].category.indexOf(category) >= 0) || category.length == 0){
+					gooMarker[i].setVisible(true);
+			  	}
+			  	// Categories don't match 
+			  	else {
+					gooMarker[i].setVisible(false);
+			  	}
+			}
+		}
 	</script>
 	</head>
 	<body onload="initMap()">
-		<div id="default" style="width:100%; height:100%"></div>
+		<div class="container">
+			<div id="default" style="width:100%; height:100%"></div>
+			<p> Filter types of bathrooms here: 
+			<select id="default" onchange="filterMarkers(this.value);">
+				<option value="all">all results</option>
+				<option value="Single-gender">Single-gender</option>
+				<option value="All-gender">All-gender</option>
+			</select>
+			</p>
+		<footer class="footer">
+			  <h1>Bathroom Buddies</h1>		
+		</footer>
+		</div>
+		
+
+<!-- 
+ 	<form id="default" onclick="filterMarkers(this.value);">
+		<input type="checkbox" value="all" onclick='filterMarkers("all");'>all</input>
+		<input type="checkbox" value="single-gender">single-gender</input>
+		<input type="checkbox" value="all-gender">all-gender</input>
+	</form>
+ -->
+
+
 	</body>
 </html>
