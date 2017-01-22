@@ -4,6 +4,7 @@
     	<meta charset="utf-8">
     	<title>Bathroom Buddies</title>
     	<link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Sniglet" rel="stylesheet">
     	<style>
       	/* Always set the map height explicitly to define the size of the div
        	* element that contains the map. */
@@ -23,18 +24,18 @@
       	p{
       		font-family: 'Catamaran', sans-serif;
       	}
-      	h1{
-      		font-family: 'Catamaran', sans-serif;
-      	}
       
 		
     	</style>
+    	 
   	</head> 
+  	
+  	
   	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   	<script src="bootstrap/js/bootstrap.min.js"></script>
 
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Wl5b0AJ8xmFYPo7qeZeSGorg6yOosxc&callback=initMap"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfMTuPX3da5dUlJuDvi_UQTXO_XNBn01I&callback=initMap"></script>
 	<script type="text/javascript">
 
 		var locations = [
@@ -72,8 +73,8 @@
 			['Elena Baskin Building H', 36.995069, -122.061023, 'Elena Baskin Building H, located in room H5', ['All-gender', 'all']],
 			['Elena Baskin Building P', 36.994819, -122.061295, 'Elena Baskin Building P, located in rooms P105, P106', ['All-gender', 'all']],
 			['Crown Vallier Hall', 37.000285, -122.058161, 'Accessible from inside building. Located on the first floor to next to the staircase.', ['Single-gender', 'all']],
-			['OPERS', 36.994984, -122.054091, 'Accessible from inside building. Located at the doors that lead to the swimming pool on opposite ends.', ['Single-gender', 'all']],
-			['OPERS Locker Room', 36.994347, -122.054771, 'Accessible from outside building. Once you pass through OPERS main building, right across the tennis courts, make a right as if you’re going to the dance studio.', ['Single-gender', 'all']],
+			['OPERS', 36.994984, -122.054091, 'Accessible from inside building. Located at the doors that lead to the swimming pool on opposite ends. <br> <img src="opers.jpg" alt="opers" style="height:200px;">  <img src="opers2.jpg" alt="opers2" style="height:200px;">', ['Single-gender', 'all']],
+			['OPERS Locker Room', 36.994347, -122.054771, 'Accessible from outside building. Once you pass through OPERS main building, right across the tennis courts, make a right as if you’re going to the dance studio. <br> <img src="operslocker.jpg" alt="operslocker" style="height:200px;"> <img src="operslocker2.jpg" alt="operslocker2" style="height:200px;">', ['Single-gender', 'all']],
 			['Kresge Town Hall', 36.998781, -122.066188, 'Accessible from outside of building. Located across from the Owl’s Nest Cafe in the hallway.', ['Single-gender', 'all']],
 			['Rachel Carson Dining Hall', 36.991580, -122.065375, 'Accessible from inside building. Located on the right just after swiping into the dining hall.', ['Single-gender', 'all']],
 			['Oakes Learning Center', 36.989259, -122.063217, 'Accessible from inside building. Located near the Oakes cafe and the Learning Center.', ['Single-gender', 'all']]
@@ -145,13 +146,15 @@
 			<div id="default" style="width:100%; height:100%"></div>
 			<p> Filter types of bathrooms here: 
 			<select id="default" onchange="filterMarkers(this.value);">
-				<option value="all">all results</option>
+				<option value="all">All Results</option>
 				<option value="Single-gender">Single-gender</option>
 				<option value="All-gender">All-gender</option>
 			</select>
 			</p>
-		<footer class="footer">
-			  <h1>Bathroom Buddies</h1>		
+		<footer class="footer" style="float: right">
+			  <h1 style="font-family: 'Sniglet', cursive;">Bathroom Buddies
+			  	<img src="bathroombuddieslogo.png" alt="bathroombuddieslogo" style="height:100px;">
+			  </h1>
 		</footer>
 		</div>
 		
